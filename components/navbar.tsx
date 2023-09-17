@@ -12,7 +12,7 @@ export default function Navbar() {
   return (
     <>
     <nav className='flex justify-between bg-white w-full h-[100px] shadow-lg items-center'>
-      <div className='w-[100px] ml-10'>
+      <div className='w-[150px] ml-10'>
         <Link href={"/"}>
         <Image
           src='/img/essential_logo.png'
