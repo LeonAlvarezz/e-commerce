@@ -1,6 +1,4 @@
-'use client';
 import { Product } from '@prisma/client';
-import React, { useEffect, useState } from 'react';
 type Props = {
   products: Product[];
 };
