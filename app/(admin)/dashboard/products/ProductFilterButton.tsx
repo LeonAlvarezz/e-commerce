@@ -10,12 +10,12 @@ const productFilter: ProductFilterButton[] = [
   {
     id: 1,
     title: 'All Product',
-    url: '/products/all',
+    url: '/dashboard/products/add-product',
   },
   {
     id: 2,
     title: 'Featured Product',
-    url: '/products/featured',
+    url: '/dashboard/products/featured',
   },
 ];
 export default function ProductFilterButton() {
