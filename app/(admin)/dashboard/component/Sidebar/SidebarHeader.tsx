@@ -8,7 +8,7 @@ type Props = {
 };
 export default function SidebarHeader({ handleChangeSbSize, sbSize }: Props) {
   return (
-    <section className='w-full'>
+    <section className='sticky top-0 w-full'>
       <div className='mb-4 flex w-full justify-between p-2'>
         <div className='flex gap-2'>
           <div className='relative aspect-square w-12'>
@@ -30,7 +30,7 @@ export default function SidebarHeader({ handleChangeSbSize, sbSize }: Props) {
           </div>
         </button>
       </div>
-      <hr className='border-gray-600' />
+      <hr className='border-white' />
     </section>
   );
 }

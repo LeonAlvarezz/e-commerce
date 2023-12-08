@@ -12,7 +12,7 @@ export default function Input({ name, label, type, placeholder }: Props) {
       <input
         type={type}
         name={name}
-        className='border border-slate-500'
+        className='border border-slate-500 p-2'
         placeholder={placeholder}
       />
     </div>

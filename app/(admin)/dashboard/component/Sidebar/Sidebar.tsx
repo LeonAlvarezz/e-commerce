@@ -45,31 +45,33 @@ const accountSubContent: SubContentType[] = [
   },
 ];
 export default function Sidebar() {
-  const [sbSize, setSbSize] = useState<boolean>(false);
+  const [sbSize, setSbSize] = useState<boolean>(true);
   const handleChangeSbSize = () => {
     setSbSize((current) => !current);
   };
   return (
     <aside
       className={cn(
-        'sticky h-screen w-72 bg-slate-500 transition-all',
+        'sticky top-0 min-h-screen w-64 bg-slate-500 transition-all',
         sbSize && 'w-24'
       )}
     >
-      <SidebarHeader
-        sbSize={sbSize}
-        handleChangeSbSize={handleChangeSbSize}
-      ></SidebarHeader>
-      <SubContent
-        subContentTitle={'Overview'}
-        subContent={overViewSubContent}
-        sbSize={sbSize}
-      ></SubContent>
-      <SubContent
-        subContentTitle={'Account'}
-        subContent={accountSubContent}
-        sbSize={sbSize}
-      ></SubContent>
+      <div className='sticky top-0'>
+        <SidebarHeader
+          sbSize={sbSize}
+          handleChangeSbSize={handleChangeSbSize}
+        ></SidebarHeader>
+        <SubContent
+          subContentTitle={'Overview'}
+          subContent={overViewSubContent}
+          sbSize={sbSize}
+        ></SubContent>
+        <SubContent
+          subContentTitle={'Account'}
+          subContent={accountSubContent}
+          sbSize={sbSize}
+        ></SubContent>
+      </div>
     </aside>
   );
 }
