@@ -5,12 +5,12 @@ import Button from '@/components/button';
 import Input from './Input';
 import InputNumber from './InputNumber';
 type Props = {
-  handleSubmit: (formData: FormData) => Promise<never>;
+  createProduct: (formData: FormData) => Promise<never>;
 };
-export default function Form({ handleSubmit }: Props) {
+export default function Form({ createProduct }: Props) {
   return (
     <div>
-      <form action={handleSubmit}>
+      <form action={createProduct}>
         <Input type='text' name='name' label='Name' placeholder='Coke' />
         <Input
           type='text'

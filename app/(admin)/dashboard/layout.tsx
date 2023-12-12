@@ -1,5 +1,4 @@
 import Sidebar from '@/app/(admin)/dashboard/component/Sidebar/Sidebar';
-import cn from '@/lib/util';
 import { Inter } from 'next/font/google';
 const inter = Inter({ subsets: ['latin'] });
 export default function RootLayout({
