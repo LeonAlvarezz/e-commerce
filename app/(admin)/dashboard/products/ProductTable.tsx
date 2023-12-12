@@ -1,4 +1,6 @@
+'use client';
 import { Product } from '@prisma/client';
+import Link from 'next/link';
 type Props = {
   products: Product[];
 };
@@ -32,12 +34,22 @@ export default function ProductTable({ products }: Props) {
                 {product.quantity}
               </td>
               <td className='border border-slate-900 bg-gray-200 py-2'>
-                {product.price}
+                ${product.price}
               </td>
               <td className='border border-slate-900 bg-gray-200 py-2'>
-                <button className='rounded-[4px] bg-green-400 px-4 py-1 text-white transition-colors hover:bg-green-700'>
-                  Edit
-                </button>
+                <Link
+                  href='/dashboard/products/update-product?id=[product.id]'
+                  as={`/dashboard/products/update-product/?id=${product.id}`}
+                >
+                  <button
+                    onClick={() => {
+                      console.log(product.id);
+                    }}
+                    className='rounded-[4px] bg-green-400 px-4 py-1 text-white transition-colors hover:bg-green-700'
+                  >
+                    Edit
+                  </button>
+                </Link>
               </td>
             </tr>
           ))}

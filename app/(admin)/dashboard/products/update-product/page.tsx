@@ -1,11 +1,8 @@
 import React from 'react';
-import Input from '../../component/Sidebar/Input';
-import Button from '@/components/button';
 import prisma from '@/lib/prisma';
 import { revalidatePath } from 'next/cache';
-import BackButton from '../../component/Sidebar/BackButton';
 import { redirect } from 'next/navigation';
-import Form from '../../component/Sidebar/Form';
+import UpdateForm from '../../component/Sidebar/UpdateForm';
 
 export default function page() {
   const handleSubmit = async (formData: FormData) => {
@@ -26,7 +23,7 @@ export default function page() {
   };
   return (
     <div className='m-auto flex min-h-screen items-center justify-center'>
-      <Form handleSubmit={handleSubmit} />
+      <UpdateForm handleSubmit={handleSubmit} />
     </div>
   );
 }
