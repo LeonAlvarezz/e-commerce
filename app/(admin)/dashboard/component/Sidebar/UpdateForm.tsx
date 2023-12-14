@@ -9,7 +9,7 @@ import { useParams, useSearchParams } from 'next/navigation';
 import { getProductById } from '../../products/helper/ProductHelper';
 import { Product } from '@prisma/client';
 type Props = {
-  updateProduct: (formData: FormData) => void;
+  updateProduct: (id: number, formData: FormData) => void;
 };
 export default function UpdateForm({ updateProduct }: Props) {
   const [selectedProduct, setSelectedProduct] = useState<Product>({
@@ -38,6 +38,7 @@ export default function UpdateForm({ updateProduct }: Props) {
 
     getProduct();
   }, []);
+  const updateProductwithId = updateProduct.bind(null, id);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSelectedProduct((prev) => ({
@@ -47,15 +48,15 @@ export default function UpdateForm({ updateProduct }: Props) {
   };
   return (
     <div>
-      <form action={updateProduct}>
+      <form action={updateProductwithId}>
         <h1 className='mb-4 text-4xl'>Update Product</h1>
-        <InputNumber
+        {/* <InputNumber
           name='id'
           placeholder='10'
           value={selectedProduct?.id}
           allowDecimal={false}
           additionalClass='hidden'
-        />
+        /> */}
         <Input
           type='text'
           name='name'

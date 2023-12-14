@@ -6,14 +6,12 @@ type Props = {
   additionalClass?: ClassValue;
   onClick?: any;
   onSubmit?: any;
-  formAction?: any;
 };
 export default function Button({
   label,
   additionalClass,
   onClick,
   onSubmit,
-  formAction,
 }: Props) {
   return (
     <button
@@ -23,7 +21,6 @@ export default function Button({
       )}
       onClick={onClick}
       onSubmit={onSubmit}
-      formAction={formAction}
     >
       {label}
     </button>

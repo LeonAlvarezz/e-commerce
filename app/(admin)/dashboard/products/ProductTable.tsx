@@ -1,6 +1,11 @@
-'use client';
+import Button from '@/components/button';
 import { Product } from '@prisma/client';
 import Link from 'next/link';
+import { deleteProduct } from './helper/ProductHelper';
+import prisma from '@/lib/prisma';
+import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
+import InputNumber from '../component/Sidebar/InputNumber';
 type Props = {
   products: Product[];
 };
@@ -36,20 +41,29 @@ export default function ProductTable({ products }: Props) {
               <td className='border border-slate-900 bg-gray-200 py-2'>
                 ${product.price}
               </td>
-              <td className='border border-slate-900 bg-gray-200 py-2'>
+              <td className='justify-center border border-slate-900 bg-gray-200 py-2'>
                 <Link
                   href='/dashboard/products/update-product?id=[product.id]'
                   as={`/dashboard/products/update-product/?id=${product.id}`}
                 >
-                  <button
-                    onClick={() => {
-                      console.log(product.id);
-                    }}
-                    className='rounded-[4px] bg-green-400 px-4 py-1 text-white transition-colors hover:bg-green-700'
-                  >
-                    Edit
-                  </button>
+                  <Button
+                    label='Edit'
+                    additionalClass='bg-green-400 px-4 py-1 text-white transition-colors hover:bg-green-700 border-none'
+                  />
                 </Link>
+                <form action={deleteProduct} className='inline-block'>
+                  <InputNumber
+                    name='id'
+                    placeholder='10'
+                    value={product.id}
+                    allowDecimal={false}
+                    additionalClass='hidden'
+                  />
+                  <Button
+                    label='Delete'
+                    additionalClass='ml-2 bg-red-400 px-4 py-1 text-white transition-colors hover:bg-red-700 border-none'
+                  />
+                </form>
               </td>
             </tr>
           ))}
