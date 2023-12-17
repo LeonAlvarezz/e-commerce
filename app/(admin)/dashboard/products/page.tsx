@@ -1,5 +1,5 @@
 import { Product } from '@prisma/client';
-import prisma from '@/lib/prisma';
+import prisma from '@/service/prisma';
 import React from 'react';
 import ProductFilterButton from './ProductFilterButton';
 import ProductTable from './ProductTable';

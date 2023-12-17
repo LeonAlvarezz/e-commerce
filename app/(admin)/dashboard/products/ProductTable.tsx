@@ -2,10 +2,11 @@ import Button from '@/components/button';
 import { Product } from '@prisma/client';
 import Link from 'next/link';
 import { deleteProduct } from './helper/ProductHelper';
-import prisma from '@/lib/prisma';
+import prisma from '@/service/prisma';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import InputNumber from '../component/Sidebar/InputNumber';
+import { formatFeatured, formatPrice } from '@/lib/format';
 type Props = {
   products: Product[];
 };
@@ -20,6 +21,7 @@ export default function ProductTable({ products }: Props) {
             <th className='border border-slate-900 '>Description</th>
             <th className='border border-slate-900 '>Quantity</th>
             <th className='border border-slate-900 '>Price</th>
+            <th className='border border-slate-900 '>Featured</th>
             <th className='border border-slate-900 '>Action</th>
           </tr>
         </thead>
@@ -39,7 +41,10 @@ export default function ProductTable({ products }: Props) {
                 {product.quantity}
               </td>
               <td className='border border-slate-900 bg-gray-200 py-2'>
-                ${product.price}
+                {formatPrice(product.price)}
+              </td>
+              <td className='border border-slate-900 bg-gray-200 py-2'>
+                {formatFeatured(product.featured)}
               </td>
               <td className='justify-center border border-slate-900 bg-gray-200 py-2'>
                 <Link
@@ -56,7 +61,6 @@ export default function ProductTable({ products }: Props) {
                     name='id'
                     placeholder='10'
                     value={product.id}
-                    allowDecimal={false}
                     additionalClass='hidden'
                   />
                   <Button

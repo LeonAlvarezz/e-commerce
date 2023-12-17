@@ -1,5 +1,5 @@
 'use server';
-import prisma from '@/lib/prisma';
+import prisma from '@/service/prisma';
 import { Product } from '@prisma/client';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
@@ -12,13 +12,16 @@ const fetchAllProduct = async () => {
 const createProduct = async (formData: FormData) => {
   const quantity = formData.get('quantity') as string;
   const price = formData.get('price') as string;
+  const featured = formData.get('featured') as string;  
+  console.log(featured)
+
   await prisma.product.create({
     data: {
       name: formData.get('name') as string,
       description: formData.get('description') as string,
       quantity: parseInt(quantity),
       price: parseFloat(price),
-      featured: false,
+      featured: Boolean(featured),
     },
   });
   revalidatePath('/dashboard/products');
@@ -38,6 +41,7 @@ const getProductById = async (id: number) => {
 const updateProduct = async (id: number, formData: FormData) => {
   const quantity = formData.get('quantity') as string;
   const price = formData.get('price') as string;
+  const featured = formData.get('featured') as string;  
   await prisma.product.update({
     where: { id: id },
     data: {
@@ -46,7 +50,7 @@ const updateProduct = async (id: number, formData: FormData) => {
       description: formData.get('description') as string,
       quantity: parseInt(quantity),
       price: parseFloat(price),
-      featured: false,
+      featured: Boolean(featured),
     },
   });
   revalidatePath('/dashboard/products');

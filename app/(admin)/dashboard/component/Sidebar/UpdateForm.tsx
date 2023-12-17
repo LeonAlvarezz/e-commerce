@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 import { useParams, useSearchParams } from 'next/navigation';
 import { getProductById } from '../../products/helper/ProductHelper';
 import { Product } from '@prisma/client';
+import Toggle from './Toggle';
 type Props = {
   updateProduct: (id: number, formData: FormData) => void;
 };
@@ -39,11 +40,17 @@ export default function UpdateForm({ updateProduct }: Props) {
     getProduct();
   }, []);
   const updateProductwithId = updateProduct.bind(null, id);
-
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSelectedProduct((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleCheckBox = (e: ChangeEvent<HTMLInputElement>) => {
+    setSelectedProduct((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.checked,
     }));
   };
   return (
@@ -91,6 +98,15 @@ export default function UpdateForm({ updateProduct }: Props) {
             allowDecimal
           />
         </div>
+        <div className='mb-4'>
+          <Toggle
+            checked={selectedProduct?.featured}
+            onChange={handleCheckBox}
+            name='featured'
+            label='Featured'
+          />
+        </div>
+
         <Button label='Submit' />
         <BackButton />
       </form>
