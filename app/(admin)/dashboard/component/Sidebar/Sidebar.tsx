@@ -14,21 +14,25 @@ const overViewSubContent: SubContentType[] = [
     id: 1,
     title: 'Dashboard',
     icon: <MdSpaceDashboard />,
+    linkTo: '/dashboard',
   },
   {
     id: 2,
     title: 'Product',
     icon: <IoBag />,
+    linkTo: '/dashboard/products',
   },
   {
     id: 3,
     title: 'Message',
     icon: <IoChatboxEllipses />,
+    linkTo: '/dashboard/message',
   },
   {
     id: 4,
     title: 'Statistic',
     icon: <ImStatsBars />,
+    linkTo: '/dashboard/statistic',
   },
 ];
 
@@ -37,11 +41,13 @@ const accountSubContent: SubContentType[] = [
     id: 1,
     title: 'Setting',
     icon: <IoMdSettings />,
+    linkTo: '/settings',
   },
   {
     id: 2,
     title: 'Log out',
     icon: <IoLogOut />,
+    linkTo: '/log-out',
   },
 ];
 export default function Sidebar() {
@@ -65,7 +71,7 @@ export default function Sidebar() {
           subContentTitle={'Overview'}
           subContent={overViewSubContent}
           sbSize={sbSize}
-        ></SubContent>
+        ></SubContent>  
         <SubContent
           subContentTitle={'Account'}
           subContent={accountSubContent}

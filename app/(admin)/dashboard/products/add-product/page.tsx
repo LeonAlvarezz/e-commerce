@@ -1,9 +1,9 @@
 import React from 'react';
-import Input from '../../component/Sidebar/Input';
+import Input from '../../component/Input';
 import Button from '@/components/button';
 import prisma from '@/service/prisma';
-import BackButton from '../../component/Sidebar/BackButton';
-import Form from '../../component/Sidebar/Form';
+import BackButton from '../../component/BackButton';
+import Form from '../../component/Form';
 import { createProduct } from '../helper/ProductHelper';
 export default function page() {
   return (

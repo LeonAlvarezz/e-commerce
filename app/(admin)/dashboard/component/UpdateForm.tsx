@@ -6,7 +6,7 @@ import Input from './Input';
 import InputNumber from './InputNumber';
 import { useRouter } from 'next/router';
 import { useParams, useSearchParams } from 'next/navigation';
-import { getProductById } from '../../products/helper/ProductHelper';
+import { getProductById } from '../products/helper/ProductHelper';
 import { Product } from '@prisma/client';
 import Toggle from './Toggle';
 type Props = {

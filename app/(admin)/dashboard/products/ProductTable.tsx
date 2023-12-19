@@ -5,7 +5,7 @@ import { deleteProduct } from './helper/ProductHelper';
 import prisma from '@/service/prisma';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-import InputNumber from '../component/Sidebar/InputNumber';
+import InputNumber from '../component/InputNumber';
 import { formatFeatured, formatPrice } from '@/lib/format';
 type Props = {
   products: Product[];
