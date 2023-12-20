@@ -26,12 +26,14 @@ const products: Product[] = [
     name: 'Random Jacket',
     des: 'Random Jacket from Random Brands',
     price: 200,
+    image: '/img/product/clothes1.png',
   },
   {
     id: 4,
     name: 'Random Pant',
     des: 'Random Pant from Random Brands',
     price: 200,
+    image: '/img/product/clothes1.png',
   },
 ];
 

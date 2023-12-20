@@ -7,6 +7,7 @@ type Props = {
   placeholder?: string;
   allowDecimal?: boolean;
   value?: any;
+  defaultValue?: any;
   onChange?: any;
   additionalClass?: ClassValue;
 };
@@ -16,6 +17,7 @@ export default function InputNumber({
   placeholder,
   allowDecimal,
   value,
+  defaultValue,
   onChange,
   additionalClass,
 }: Props) {
@@ -32,6 +34,7 @@ export default function InputNumber({
         value={value}
         step={allowDecimal ? '0.01' : '1'}
         onChange={onChange}
+        defaultValue={defaultValue}
       />
     </div>
   );

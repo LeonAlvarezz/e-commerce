@@ -7,6 +7,7 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import InputNumber from '../component/InputNumber';
 import { formatFeatured, formatPrice } from '@/lib/format';
+import { ChangeEvent } from 'react';
 type Props = {
   products: Product[];
 };
@@ -60,7 +61,7 @@ export default function ProductTable({ products }: Props) {
                   <InputNumber
                     name='id'
                     placeholder='10'
-                    value={product.id}
+                    defaultValue={product.id}
                     additionalClass='hidden'
                   />
                   <Button
