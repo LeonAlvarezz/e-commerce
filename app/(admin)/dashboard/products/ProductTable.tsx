@@ -7,22 +7,32 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import InputNumber from '../component/InputNumber';
 import { formatFeatured, formatPrice } from '@/lib/format';
-import { ChangeEvent } from 'react';
+import Image from 'next/image';
+import placeholder from '@/public/img/placeholder.png';
 type Props = {
   products: Product[];
 };
 export default function ProductTable({ products }: Props) {
+  if (products.length === 0) {
+    return (
+      <section className='w-full py-24 text-center'>
+        <p>No products available.</p>
+      </section>
+    );
+  }
   return (
-    <section className='mt-5'>
-      <table className='w-full table-auto text-center'>
-        <thead className='border border-red-800 bg-slate-500 text-white'>
+    <section className='relative mt-5 overflow-x-auto '>
+      <table className=' w-full table-auto text-center'>
+        <thead className=' border border-red-800 bg-slate-500 uppercase text-white'>
           <tr>
             <th className='border border-slate-900 '>ID</th>
+            <th className='border border-slate-900 '>Image</th>
             <th className='border border-slate-900 '>Name</th>
             <th className='border border-slate-900 '>Description</th>
             <th className='border border-slate-900 '>Quantity</th>
             <th className='border border-slate-900 '>Price</th>
             <th className='border border-slate-900 '>Featured</th>
+            <th className='line-clamp-1 border border-slate-900'>Created At</th>
             <th className='border border-slate-900 '>Action</th>
           </tr>
         </thead>
@@ -31,6 +41,26 @@ export default function ProductTable({ products }: Props) {
             <tr key={product.id}>
               <td className='border border-slate-900 bg-gray-200 py-2'>
                 {product.id}
+              </td>
+
+              <td className='border border-slate-900 bg-gray-200 py-2'>
+                {product.image == '' ? (
+                  <div className='relative flex aspect-video h-[100px] w-full justify-center'>
+                    <Image
+                      src={'/img/placeholder.png'}
+                      fill
+                      className='object-cover'
+                      alt='placeholder  '
+                    />
+                  </div>
+                ) : (
+                  <Image
+                    src={product.image}
+                    fill
+                    className='relative aspect-square w-[400px]'
+                    alt=''
+                  />
+                )}
               </td>
               <td className='border border-slate-900 bg-gray-200 py-2'>
                 {product.name}
@@ -46,6 +76,9 @@ export default function ProductTable({ products }: Props) {
               </td>
               <td className='border border-slate-900 bg-gray-200 py-2'>
                 {formatFeatured(product.featured)}
+              </td>
+              <td className='border border-slate-900 bg-gray-200 py-2'>
+                {product.createAt.toLocaleDateString()}
               </td>
               <td className='justify-center border border-slate-900 bg-gray-200 py-2'>
                 <Link
