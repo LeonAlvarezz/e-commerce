@@ -2,13 +2,9 @@ import Button from '@/components/button';
 import { Product } from '@prisma/client';
 import Link from 'next/link';
 import { deleteProduct } from './helper/ProductHelper';
-import prisma from '@/service/prisma';
-import { revalidatePath } from 'next/cache';
-import { redirect } from 'next/navigation';
-import InputNumber from '../component/InputNumber';
 import { formatFeatured, formatPrice } from '@/lib/format';
+import InputNumber from '../component/InputNumber';
 import Image from 'next/image';
-import placeholder from '@/public/img/placeholder.png';
 type Props = {
   products: Product[];
 };
@@ -21,31 +17,48 @@ export default function ProductTable({ products }: Props) {
     );
   }
   return (
-    <section className='relative mt-5 overflow-x-auto '>
-      <table className=' w-full table-auto text-center'>
-        <thead className=' border border-red-800 bg-slate-500 uppercase text-white'>
+    <section className='mt-5 '>
+      <table className='relative min-w-full overflow-x-auto sm:rounded-lg'>
+        <thead className=' bg-slate-500 text-white'>
           <tr>
-            <th className='border border-slate-900 '>ID</th>
-            <th className='border border-slate-900 '>Image</th>
-            <th className='border border-slate-900 '>Name</th>
-            <th className='border border-slate-900 '>Description</th>
-            <th className='border border-slate-900 '>Quantity</th>
-            <th className='border border-slate-900 '>Price</th>
-            <th className='border border-slate-900 '>Featured</th>
-            <th className='line-clamp-1 border border-slate-900'>Created At</th>
-            <th className='border border-slate-900 '>Action</th>
+            <th scope='col' className='p-2'>
+              ID
+            </th>
+            <th scope='col' className='p-2'>
+              Image
+            </th>
+            <th scope='col' className='p-2'>
+              Name
+            </th>
+            <th scope='col' className='p-2'>
+              Description
+            </th>
+            <th scope='col' className='p-2'>
+              Quantity
+            </th>
+            <th scope='col' className='p-2'>
+              Price
+            </th>
+            <th scope='col' className='p-2'>
+              Featured
+            </th>
+            <th scope='col' className='p-2'>
+              Action
+            </th>
           </tr>
         </thead>
         <tbody>
           {products.map((product) => (
-            <tr key={product.id}>
-              <td className='border border-slate-900 bg-gray-200 py-2'>
+            <tr
+              key={product.id}
+              className='border-b border-slate-400 bg-gray-200 text-center  hover:cursor-pointer hover:bg-gray-300'
+            >
+              <th scope='row' className='border-r border-gray-400 px-3 py-2'>
                 {product.id}
-              </td>
-
-              <td className='border border-slate-900 bg-gray-200 py-2'>
+              </th>
+              <td className='p-2'>
                 {product.image == '' ? (
-                  <div className='relative flex aspect-video h-[100px] w-full justify-center'>
+                  <div className='relative flex aspect-video h-16 w-full justify-center shadow-md lg:h-auto'>
                     <Image
                       src={'/img/placeholder.png'}
                       fill
@@ -62,25 +75,22 @@ export default function ProductTable({ products }: Props) {
                   />
                 )}
               </td>
-              <td className='border border-slate-900 bg-gray-200 py-2'>
+              <td scope='row' className='px-2 py-2'>
                 {product.name}
               </td>
-              <td className='border border-slate-900 bg-gray-200 py-2'>
+              <td scope='row' className='px-1 py-2'>
                 {product.description}
               </td>
-              <td className='border border-slate-900 bg-gray-200 py-2'>
+              <td scope='row' className='px-1 py-2'>
                 {product.quantity}
               </td>
-              <td className='border border-slate-900 bg-gray-200 py-2'>
+              <td scope='row' className='px-1 py-2'>
                 {formatPrice(product.price)}
               </td>
-              <td className='border border-slate-900 bg-gray-200 py-2'>
+              <td scope='row' className='px-1 py-2'>
                 {formatFeatured(product.featured)}
               </td>
-              <td className='border border-slate-900 bg-gray-200 py-2'>
-                {product.createAt.toLocaleDateString()}
-              </td>
-              <td className='justify-center border border-slate-900 bg-gray-200 py-2'>
+              <td scope='row' className='px-1 py-2 text-left lg:text-center'>
                 <Link
                   href='/dashboard/products/update-product?id=[product.id]'
                   as={`/dashboard/products/update-product/?id=${product.id}`}
@@ -94,12 +104,12 @@ export default function ProductTable({ products }: Props) {
                   <InputNumber
                     name='id'
                     placeholder='10'
-                    defaultValue={product.id}
+                    value={product.id}
                     additionalClass='hidden'
                   />
                   <Button
                     label='Delete'
-                    additionalClass='ml-2 bg-red-400 px-4 py-1 text-white transition-colors hover:bg-red-700 border-none'
+                    additionalClass='mt-2 lg:ml-2 bg-red-400 px-4 py-1 text-white transition-colors hover:bg-red-700 border-none'
                   />
                 </form>
               </td>
