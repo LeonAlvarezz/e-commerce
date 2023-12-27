@@ -20,6 +20,9 @@ export default function UpdateForm({ updateProduct }: Props) {
     price: 0,
     quantity: 0,
     featured: false,
+    image: '',
+    updateAt: new Date(),
+    createAt: new Date(),
   });
   const params = useSearchParams();
   const id: number = Number(params.get('id'));
@@ -57,13 +60,6 @@ export default function UpdateForm({ updateProduct }: Props) {
     <div>
       <form action={updateProductwithId}>
         <h1 className='mb-4 text-4xl'>Update Product</h1>
-        {/* <InputNumber
-          name='id'
-          placeholder='10'
-          value={selectedProduct?.id}
-          allowDecimal={false}
-          additionalClass='hidden'
-        /> */}
         <Input
           type='text'
           name='name'

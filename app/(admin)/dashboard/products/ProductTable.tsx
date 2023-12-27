@@ -67,12 +67,14 @@ export default function ProductTable({ products }: Props) {
                     />
                   </div>
                 ) : (
-                  <Image
-                    src={product.image}
-                    fill
-                    className='relative aspect-square w-[400px]'
-                    alt=''
-                  />
+                  <div className='relative flex aspect-video h-16 w-full justify-center shadow-md lg:h-auto'>
+                    <Image
+                      src={product.image}
+                      fill
+                      className='relative aspect-square w-[400px]'
+                      alt=''
+                    />
+                  </div>
                 )}
               </td>
               <td scope='row' className='px-2 py-2'>

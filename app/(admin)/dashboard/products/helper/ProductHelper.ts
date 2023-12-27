@@ -13,7 +13,8 @@ const createProduct = async (formData: FormData) => {
   const quantity = formData.get('quantity') as string;
   const price = formData.get('price') as string;
   const featured = formData.get('featured') as string;  
-  console.log(featured)
+  const image = formData.get('image') as string;  
+  console.log(image)
 
   await prisma.product.create({
     data: {
@@ -22,6 +23,9 @@ const createProduct = async (formData: FormData) => {
       quantity: parseInt(quantity),
       price: parseFloat(price),
       featured: Boolean(featured),
+      image: image,
+      createAt: new Date(),
+      updateAt: new Date(),
     },
   });
   revalidatePath('/dashboard/products');
@@ -51,6 +55,8 @@ const updateProduct = async (id: number, formData: FormData) => {
       quantity: parseInt(quantity),
       price: parseFloat(price),
       featured: Boolean(featured),
+      createAt: new Date(),
+      updateAt: new Date(),
     },
   });
   revalidatePath('/dashboard/products');
@@ -65,6 +71,11 @@ const deleteProduct = async (formData: FormData) => {
   revalidatePath('/dashboard/products');
   redirect('/dashboard/products');
 };
+
+
+
+
+
 
 export {
   fetchAllProduct,
