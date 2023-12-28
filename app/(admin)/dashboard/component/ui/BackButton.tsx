@@ -1,7 +1,7 @@
 'use client';
-import Button from '@/components/button';
 import { useRouter } from 'next/navigation';
 import React from 'react';
+import Button from './button';
 
 export default function BackButton() {
   const router = useRouter();

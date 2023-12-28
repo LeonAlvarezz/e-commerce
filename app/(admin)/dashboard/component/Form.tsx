@@ -1,12 +1,14 @@
 'use client';
 import React, { ChangeEvent, useState } from 'react';
-import BackButton from './BackButton';
-import Button from '@/components/button';
-import Input from './Input';
-import InputNumber from './InputNumber';
-import Toggle from './Toggle';
+import BackButton from './ui/BackButton';
+import Button from '@/app/(admin)/dashboard/component/ui/button';
+import Input from './ui/Input';
+import InputNumber from './ui/InputNumber';
+import Toggle from './ui/Toggle';
 import UploadImage from './UploadImage';
 import axios from 'axios';
+import Image from 'next/image';
+import Loading from './ui/Loading';
 
 type Props = {
   createProduct: (formData: FormData) => Promise<never>;
@@ -15,6 +17,7 @@ type Props = {
 export default function Form({ createProduct }: Props) {
   const [isChecked, setIsChecked] = useState(false);
   const [imageURLs, setimageURLs] = useState<string[]>([]);
+  const [loading, setLoading] = useState(false);
 
   const handleCheckBox = (event: ChangeEvent<HTMLInputElement>) => {
     setIsChecked(event.target.checked);
@@ -28,6 +31,7 @@ export default function Form({ createProduct }: Props) {
   };
 
   const uploadImageToImgBB = async (images: FileList) => {
+    setLoading(true);
     for (let i = 0; i < images.length; i++) {
       const formData = new FormData();
       formData.append('image', images[i]);
@@ -44,6 +48,7 @@ export default function Form({ createProduct }: Props) {
         );
         const uploadedImageUrl = response.data.data.display_url;
         setimageURLs((prev) => [...prev, uploadedImageUrl]);
+        setLoading(false);
       } catch (error) {
         throw error;
       }
@@ -52,6 +57,9 @@ export default function Form({ createProduct }: Props) {
 
   const handleImageUpload = async (event: ChangeEvent<HTMLInputElement>) => {
     let images = event.target.files;
+    if (imageURLs && imageURLs.length > 0) {
+      setimageURLs([]); // Reset imageURLs to empty, replace 'setImageURLs' with your actual state setter
+    }
     if (images) {
       // Get the selected files
       const selectedFiles = Array.from(images);
@@ -103,6 +111,28 @@ export default function Form({ createProduct }: Props) {
             onChange={handleInputChange}
           />
           <UploadImage label='Image' onChange={handleImageUpload} />
+          {loading ? (
+            <div className='mt-4 flex items-center justify-center'>
+              {/* Replace this with your preferred loading spinner or indicator */}
+              <Loading />
+            </div>
+          ) : (
+            imageURLs.length > 0 && (
+              <div className='mt-4 flex gap-2'>
+                {imageURLs.map((url, index) => (
+                  <div key={index} className='relative aspect-square h-52'>
+                    <Image
+                      src={url}
+                      alt={`image-${index}`}
+                      fill
+                      sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+                      className='object-contain'
+                    />
+                  </div>
+                ))}
+              </div>
+            )
+          )}
         </div>
         <Button label='Submit' />
         <BackButton />

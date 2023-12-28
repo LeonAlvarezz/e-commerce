@@ -1,14 +1,14 @@
 'use client';
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import BackButton from './BackButton';
-import Button from '@/components/button';
-import Input from './Input';
-import InputNumber from './InputNumber';
+import BackButton from './ui/BackButton';
+import Button from '@/app/(admin)/dashboard/component/ui/button';
+import Input from './ui/Input';
+import InputNumber from './ui/InputNumber';
 import { useRouter } from 'next/router';
 import { useParams, useSearchParams } from 'next/navigation';
 import { getProductById } from '../products/helper/ProductHelper';
 import { Product } from '@prisma/client';
-import Toggle from './Toggle';
+import Toggle from './ui/Toggle';
 type Props = {
   updateProduct: (id: number, formData: FormData) => void;
 };

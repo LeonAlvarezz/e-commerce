@@ -1,9 +1,9 @@
-import Button from '@/components/button';
+import Button from '@/app/(admin)/dashboard/component/ui/button';
 import { Product } from '@prisma/client';
 import Link from 'next/link';
 import { deleteProduct } from './helper/ProductHelper';
 import { formatFeatured, formatPrice } from '@/lib/format';
-import InputNumber from '../component/InputNumber';
+import InputNumber from '../component/ui/InputNumber';
 import Image from 'next/image';
 type Props = {
   products: Product[];
@@ -62,8 +62,9 @@ export default function ProductTable({ products }: Props) {
                     <Image
                       src={'/img/placeholder.png'}
                       fill
-                      className='object-cover'
-                      alt='placeholder  '
+                      className='object-contain'
+                      alt='placeholder'
+                      sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
                     />
                   </div>
                 ) : (
@@ -71,8 +72,9 @@ export default function ProductTable({ products }: Props) {
                     <Image
                       src={product.image}
                       fill
-                      className='relative aspect-square w-[400px]'
+                      className='object-contain'
                       alt=''
+                      sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
                     />
                   </div>
                 )}
