@@ -45,17 +45,19 @@ const getProductById = async (id: number) => {
 const updateProduct = async (id: number, formData: FormData) => {
   const quantity = formData.get('quantity') as string;
   const price = formData.get('price') as string;
+  const image = formData.get('image') as string;  
   const featured = formData.get('featured') as string;  
+  const createAt = formData.get('createAt') as string;  
   await prisma.product.update({
     where: { id: id },
     data: {
-      id: id,
       name: formData.get('name') as string,
       description: formData.get('description') as string,
       quantity: parseInt(quantity),
       price: parseFloat(price),
       featured: Boolean(featured),
-      createAt: new Date(),
+      image: image,
+      createAt: new Date(createAt),
       updateAt: new Date(),
     },
   });

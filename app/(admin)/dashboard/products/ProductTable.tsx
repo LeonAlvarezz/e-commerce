@@ -5,6 +5,8 @@ import { deleteProduct } from './helper/ProductHelper';
 import { formatFeatured, formatPrice } from '@/lib/format';
 import InputNumber from '../component/ui/InputNumber';
 import Image from 'next/image';
+import { TiTick, TiTimes } from 'react-icons/ti';
+
 type Props = {
   products: Product[];
 };
@@ -79,11 +81,13 @@ export default function ProductTable({ products }: Props) {
                   </div>
                 )}
               </td>
-              <td scope='row' className='px-2 py-2'>
-                {product.name}
+              <td scope='row' className='w-[20rem] px-2 py-2'>
+                <p className='text-pretty line-clamp-1'>{product.name}</p>
               </td>
-              <td scope='row' className='px-1 py-2'>
-                {product.description}
+              <td scope='row' className='w-52 px-1 py-2'>
+                <p className='text-pretty line-clamp-1'>
+                  {product.description}
+                </p>
               </td>
               <td scope='row' className='px-1 py-2'>
                 {product.quantity}
@@ -92,7 +96,15 @@ export default function ProductTable({ products }: Props) {
                 {formatPrice(product.price)}
               </td>
               <td scope='row' className='px-1 py-2'>
-                {formatFeatured(product.featured)}
+                {formatFeatured(product.featured) == 'true' ? (
+                  <div className='flex justify-center'>
+                    <TiTick size={50} color='#04AD0E' />
+                  </div>
+                ) : (
+                  <div className='flex justify-center'>
+                    <TiTimes size={50} color='#FF0202' />
+                  </div>
+                )}
               </td>
               <td scope='row' className='px-1 py-2 text-left lg:text-center'>
                 <Link
